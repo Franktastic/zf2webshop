@@ -19,3 +19,8 @@ $this->headTitle($title);
         </tr>
     <?php endforeach; ?>
 </table>
+
+<a class="btn btn-default" href="<?php echo $this->url('category',
+    array('action'=>'clearSession'));?>">
+    Sessie legen
+</a>

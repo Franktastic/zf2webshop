@@ -6,8 +6,6 @@ use Category\Model\Category;
 use Category\Service\CatalogService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Session\Container as SessionContainer;
-
 
 class CategoryController extends AbstractActionController
 {
@@ -53,6 +51,15 @@ class CategoryController extends AbstractActionController
         return new ViewModel([
             'products' => $products
         ]);
+    }
+
+    public function clearSessionAction() {
+        $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
+        $shoppingCartService->clearSession();
+
+        return $this->redirect()->toRoute('category', array(
+            'action' => 'index'
+        ));
     }
 
 }

@@ -4,6 +4,8 @@ namespace ShoppingCart;
 
 use ShoppingCart\Service\ShoppingCartService;
 
+use Zend\Session\Container as SessionContainer;
+
 return array(
     /*'doctrine' => array(
         'driver' => array(
@@ -26,14 +28,19 @@ return array(
         'invokables' => array(
             'ShoppingCart\Controller\ShoppingCart' => 'ShoppingCart\Controller\ShoppingCartController'
         ),
+        'factories' => [
+            'ShoppingCart\Controller\ShoppingCart' => 'ShoppingCart\Controller\ShoppingCartControllerFactory'
+        ]
     ),
 
     'service_manager' => [
         'factories' => [
-            'ShoppingCartService' => function () {
-                $sessionContainer = new ShoppingCartService($sessionContainer);
+            'ShoppingCartService' => function ($sm) {
+                $sessionContainer = new SessionContainer('cart');
 
-                return $sessionContainer;
+                $service = new ShoppingCartService($sessionContainer);
+
+                return $service;
             }
         ]
     ],
