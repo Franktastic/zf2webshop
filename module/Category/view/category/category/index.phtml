@@ -1,0 +1,21 @@
+<?php
+$title = 'Categories';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table">
+    <tr>
+        <th>Titel</th>
+    </tr>
+    <?php foreach ($categories as $category) : ?>
+        <tr>
+            <td>
+                <a href="<?php echo $this->url('category',
+                    array('action'=>'view', 'id' => $category->getId()));?>">
+                    <?php echo $this->escapeHtml($category->getTitle())?>
+                </a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

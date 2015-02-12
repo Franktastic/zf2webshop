@@ -1,0 +1,13 @@
+<?php
+$title = $this->escapeHtml($product->getTitle());
+$this->headTitle($title);
+?>
+<h1><?php echo $title ?></h1>
+<p><?php echo $this->escapeHtml($product->getDescription()); ?></p>
+<p>Nu voor maar &euro;<?php echo $this->escapeHtml($product->getPrice()); ?></p>
+<p>
+    <a class="btn btn-default" href="<?php echo $this->url('product',
+        array('action'=>'addToCart', 'id' => $product->getId()));?>">
+        Voeg toe aan winkelwagen
+    </a>
+</p>

@@ -1,0 +1,21 @@
+<?php
+$title = 'Category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table">
+    <tr>
+        <th>Productnaam</th>
+    </tr>
+    <?php foreach ($products as $product) : ?>
+        <tr>
+            <td>
+                <a href="<?php echo $this->url('product',
+                    array('action'=>'view', 'id' => $product->getId()));?>">
+                    <?php echo $this->escapeHtml($product->getTitle())?>
+                </a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
