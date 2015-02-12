@@ -5,7 +5,8 @@ use Category\Model\Category;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Session\Container as SessionContainer;
+
+use ShoppingCart\Service\ShoppingCartService;
 
 class ProductController extends AbstractActionController
 {
@@ -35,17 +36,8 @@ class ProductController extends AbstractActionController
             ));
         }
 
-        //Session stuff
-        $session = new SessionContainer('cart');
-
-        if (!isset($session->cart)) {
-            $session->cart = [];
-        }
-
-        $item = [];
-        $item['id'] = $productId;
-        $item['quantity'] = 1;
-        $session->cart[] = $item;
+        $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
+        $shoppingCartService->addToCart($productId);
 
         return $this->redirect()->toRoute('category', array(
             'action' => 'index'

@@ -28,10 +28,9 @@ class CategoryController extends AbstractActionController
     {
         $categories = $this->catalogService->getCategories();
 
+        $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
+        $cart = $shoppingCartService->getCart();
 
-        //Session stuff
-        $session = new SessionContainer('cart');
-        $cart = $session->cart;
         \Doctrine\Common\Util\Debug::dump($cart);
 
         return new ViewModel([

@@ -2,7 +2,7 @@
 
 namespace ShoppingCart;
 
-//use ShoppingCart\Service\ShoppingCartService;
+use ShoppingCart\Service\ShoppingCartService;
 
 return array(
     /*'doctrine' => array(
@@ -28,17 +28,15 @@ return array(
         ),
     ),
 
-    /*'service_manager' => [
+    'service_manager' => [
         'factories' => [
-            'CatalogService' => function ($sm) {
-                $objectManager = $sm->get('Doctrine\ORM\EntityManager');
+            'ShoppingCartService' => function () {
+                $sessionContainer = new ShoppingCartService($sessionContainer);
 
-                $service = new CatalogService($objectManager);
-
-                return $service;
+                return $sessionContainer;
             }
         ]
-    ],*/
+    ],
 
     'router' => array(
         'routes' => array(
