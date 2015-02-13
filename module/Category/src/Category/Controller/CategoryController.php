@@ -29,10 +29,11 @@ class CategoryController extends AbstractActionController
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
-        \Doctrine\Common\Util\Debug::dump($cart);
+        //\Doctrine\Common\Util\Debug::dump($cart);
 
         return new ViewModel([
-            'categories' => $categories
+            'categories' => $categories,
+            'cart'  =>  $cart
         ]);
     }
 

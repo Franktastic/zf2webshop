@@ -38,8 +38,8 @@ class ShoppingCartService
         $product = $this->catalogService->getProduct($productId);
 
         //var_dump($product);
-        \Doctrine\Common\Util\Debug::dump($product->getTitle());
-        exit();
+        //\Doctrine\Common\Util\Debug::dump($product->getTitle());
+        //exit();
 
         if (!isset($this->sessionContainer->cart)) {
             $this->sessionContainer->cart = [];
@@ -47,6 +47,8 @@ class ShoppingCartService
 
         $item = [];
         $item['id'] = $productId;
+        $item['title'] = $product->getTitle();
+        $item['desc'] = $product->getDescription();
         $item['quantity'] = 1;
         $this->sessionContainer->cart[] = $item;
 
