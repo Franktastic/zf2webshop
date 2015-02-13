@@ -39,7 +39,7 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Order\Controller\Order',
-                        'action'     => 'order',
+                        'action'     => 'index',
                     ),
                 ),
             ),
