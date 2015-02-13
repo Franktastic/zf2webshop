@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "610c40a9fbf1347fa6a03c72efdb0705",
+    "hash": "2b434507161d9a66dd18c53022565855",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -774,12 +774,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "5c994da843e71802b4b6ce18a89f192362a222dd"
+                "reference": "6701222c51ff3e4081c1fdb1e2ed902031365e47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/5c994da843e71802b4b6ce18a89f192362a222dd",
-                "reference": "5c994da843e71802b4b6ce18a89f192362a222dd",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/6701222c51ff3e4081c1fdb1e2ed902031365e47",
+                "reference": "6701222c51ff3e4081c1fdb1e2ed902031365e47",
                 "shasum": ""
             },
             "require": {
@@ -829,7 +829,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2015-02-11 09:14:56"
+            "time": "2015-02-13 02:24:19"
         },
         {
             "name": "zendframework/zendframework",

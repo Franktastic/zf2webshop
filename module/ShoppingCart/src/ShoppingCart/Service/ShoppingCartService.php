@@ -41,16 +41,16 @@ class ShoppingCartService
             $this->sessionContainer->cart = [];
         }
 
-        $productexsist = false;
+        $productExist = false;
 
         foreach ($this->sessionContainer->cart as $key => $value) {
             if ($value['id'] == $productId) {
                 $this->sessionContainer->cart[$key]['quantity']++;
-                $productexsist = true;
+                $productExist = true;
             }
         }
 
-        if ($productexsist == false) {
+        if ($productExist == false) {
             $item = [];
             $item['quantity'] = 1;
             $item['id'] = $productId;
@@ -58,12 +58,6 @@ class ShoppingCartService
             $item['desc'] = $product->getDescription();
             $this->sessionContainer->cart[] = $item;
         }
-
-
-
-
-
-        //var_dump($this->sessionContainer->cart);
 
         return $this->sessionContainer->cart;
     }
@@ -75,7 +69,6 @@ class ShoppingCartService
     {
         $this->sessionContainer->cart = [];
         return false;
-        //return $this->sessionContainer;
     }
 
 }

@@ -16,7 +16,8 @@
     "autoload": {
         "psr-0": {
             "Category": "module/Category/src/",
-            "ShoppingCart": "module/ShoppingCart/src/"
+            "ShoppingCart": "module/ShoppingCart/src/",
+            "Order": "module/Order/src/"
         }
     }
 }

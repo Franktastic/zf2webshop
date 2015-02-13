@@ -19,10 +19,4 @@ class ShoppingCartController extends AbstractActionController
         $this->catalogService = $catalogService;
         $this->shoppingCartService = $shoppingCartService;
     }
-
-    public function viewAction()
-    {
-        //Read session and echo
-    }
-
 }
