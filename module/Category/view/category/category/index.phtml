@@ -26,7 +26,7 @@ $this->headTitle($title);
     <h2>Winkelwagen</h2>
     <dl>
         <?php foreach ($cart as $product) : ?>
-            <dt><?=$product['title']?></dt>
+            <dt><?=$product['title']?> <span class="pull-right"><?=$product['quantity']?> stuks</span></dt>
             <dd><?=$product['desc']?></dd>
         <?php endforeach; ?>
     </dl>
