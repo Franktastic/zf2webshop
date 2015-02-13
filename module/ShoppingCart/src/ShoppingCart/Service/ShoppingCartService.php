@@ -68,7 +68,6 @@ class ShoppingCartService
     public function clearSession()
     {
         $this->sessionContainer->cart = [];
-        return false;
     }
 
 }
