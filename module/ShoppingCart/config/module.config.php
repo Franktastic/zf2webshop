@@ -36,9 +36,11 @@ return array(
     'service_manager' => [
         'factories' => [
             'ShoppingCartService' => function ($sm) {
+                $catalogService = $sm->get('CatalogService');
+
                 $sessionContainer = new SessionContainer('cart');
 
-                $service = new ShoppingCartService($sessionContainer);
+                $service = new ShoppingCartService($sessionContainer, $catalogService);
 
                 return $service;
             }

@@ -1,6 +1,7 @@
 <?php
 namespace ShoppingCart\Controller;
 
+use Category\Service\CatalogService;
 use ShoppingCart\Model\ShoppingCart;
 use ShoppingCart\Service\ShoppingCartService;
 
@@ -13,8 +14,9 @@ class ShoppingCartController extends AbstractActionController
     /**
      * @param ShoppingCartService $shoppingCartService
      */
-    function __construct(ShoppingCartService $shoppingCartService)
+    function __construct(ShoppingCartService $shoppingCartService, CatalogService $catalogService)
     {
+        $this->catalogService = $catalogService;
         $this->shoppingCartService = $shoppingCartService;
     }
 

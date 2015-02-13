@@ -1,7 +1,7 @@
 <?php
 namespace ShoppingCart\Service;
 
-use Category\Service\CatalogService;
+use Category\Service\CatalogService as CatalogService;
 
 use Zend\Session\Container as SessionContainer;
 
@@ -15,9 +15,10 @@ class ShoppingCartService
     /**
      * @param SessionContainer $sessionContainer
      */
-    function __construct(SessionContainer $sessionContainer)
+    function __construct(SessionContainer $sessionContainer, CatalogService $catalogService)
     {
         $this->sessionContainer = $sessionContainer;
+        $this->catalogService = $catalogService;
     }
 
     /**
@@ -33,8 +34,12 @@ class ShoppingCartService
      */
     public function addToCart($productId)
     {
-        //$catalogService = $this->getServiceLocator()->get('CatalogService');
-        //$product = $catalogService->getProduct($productId);
+
+        $product = $this->catalogService->getProduct($productId);
+
+        //var_dump($product);
+        \Doctrine\Common\Util\Debug::dump($product->getTitle());
+        exit();
 
         if (!isset($this->sessionContainer->cart)) {
             $this->sessionContainer->cart = [];
