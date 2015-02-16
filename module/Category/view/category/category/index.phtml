@@ -27,8 +27,8 @@ $this->headTitle($title);
     <?php if (!empty($cart)) { ?>
         <dl>
             <?php foreach ($cart as $product) : ?>
-                <dt><?=$product['title']?> <span class="pull-right"><?=$product['quantity']?> stuks</span></dt>
-                <dd><?=$product['desc']?></dd>
+                <dt><?=$product->getTitle();?><!--<span class="pull-right"> stuks</span>--></dt>
+                <dd><?=$product->getDescription();?></dd>
             <?php endforeach; ?>
         </dl>
     <?php } else { ?>
