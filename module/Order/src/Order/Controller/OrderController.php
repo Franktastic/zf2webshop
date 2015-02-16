@@ -2,6 +2,7 @@
 namespace Order\Controller;
 
 use Order\Model\Order;
+use Category\Model\Product;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

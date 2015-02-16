@@ -1,25 +1,38 @@
 <?php
 $title = 'Bestellingen';
 $this->headTitle($title);
+
+$totalprice = 0;
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1><?php echo $this->escapeHtml($title); ?></h1>
     <h2>Winkelwagen</h2>
     <?php if (!empty($cart)) { ?>
-        <dl>
+        <table class="table">
+            <tr>
+                <th>Titel</th>
+                <th>Omschrijving</th>
+                <th>Hoeveelheid</th>
+                <th>Prijs per stuk</th>
+                <th>Prijs totaal</th>
+            </tr>
             <?php foreach ($cart as $product) : ?>
-                <dt><?=$product['title']?> <span class="pull-right"><?=$product['quantity']?> stuks</span></dt>
-                <dd><?=$product['desc']?></dd>
+                <tr>
+                    <td><?=$product['product']->getTitle();?></td>
+                    <td><?=$product['product']->getDescription();?></td>
+                    <td><?=$product['quantity'] ?> stuk(s)</td>
+                    <td>&euro;<?=$product['product']->getPrice();?></td>
+                    <td>&euro;<?=$product['quantity']*$product['product']->getPrice();?></td>
+                </tr>
+                <?php $totalprice = $totalprice + ($product['quantity']*$product['product']->getPrice());?>
             <?php endforeach; ?>
-        </dl>
+            </table>
+
+            <p><strong>Totaal: &euro;<?=$totalprice?></strong></p>
     <?php } else { ?>
         <p>Er zitten geen producten in uw winkelwagen</p>
     <?php } ?>
-    <a class="btn btn-default btn-sm" href="<?php echo $this->url('category',
-        array('action'=>'clearSession'));?>">
-        Winkelwagen legen
-    </a>
     <a class="btn btn-success btn-sm" href="<?php echo $this->url('cart',
         array('action'=>'order'));?>">
         Bestellen
