@@ -42,7 +42,21 @@ class ShoppingCartService
     {
         $product = $this->catalogService->getProduct($productId);
 
-        $this->sessionContainer->cart[] = $product;
+        $productExist = false;
+
+        foreach ($this->sessionContainer->cart as $key => $value) {
+            $productvalue = $value['product'];
+
+            if ($productvalue->getId() === $productId) {
+                $this->sessionContainer->cart[$key]['quantity']++;
+                $productExist = true;
+            }
+        }
+
+        if ($productExist == false) {
+            $insertInSession = array('quantity' => 1, 'product' => $product);
+            $this->sessionContainer->cart[] = $insertInSession;
+        }
 
         return $this->sessionContainer->cart;
     }
