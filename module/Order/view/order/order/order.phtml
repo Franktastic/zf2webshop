@@ -1,0 +1,17 @@
+<?php
+$title = 'Bestelling geplaatst';
+$this->headTitle($title);
+?>
+
+<div class="col-md-12">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <div class="alert alert-success">
+        <p>Uw bestelling is succesvol geplaatst.</p>
+        <p>
+            Ordernummer: <?=$order->getId();?> <br>
+            Prijs: &euro;<?=$order->getPrice();?> <br>
+            Datum: <?=date_format($order->getDate(),"d-m-Y H:i:s");?>
+        </p>
+    </div>
+
+</div>

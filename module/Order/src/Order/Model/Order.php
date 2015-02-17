@@ -36,6 +36,22 @@ class Order
     }
 
     /**
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
      * @param $price
      * @return $this
      */

@@ -28,6 +28,12 @@ class OrderController extends AbstractActionController
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
+        if (empty($cart)) {
+            return $this->redirect()->toRoute('order', array(
+                'action' => 'index'
+            ));
+        }
+
         $totalprice = 0;
 
         foreach ($cart as $product) {
@@ -59,6 +65,12 @@ class OrderController extends AbstractActionController
             $objectManager->persist($orderHistory);
             $objectManager->flush();
         }
+
+        $shoppingCartService->clearSession();
+
+        return new ViewModel([
+            'order' => $order
+        ]);
     }
 
 }
