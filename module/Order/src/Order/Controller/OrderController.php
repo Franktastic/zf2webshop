@@ -4,6 +4,7 @@ namespace Order\Controller;
 use Order\Model\Order;
 use Order\Model\OrderHistory;
 use Category\Model\Product;
+use Order\Service\OrderService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -11,6 +12,18 @@ use Zend\View\Model\ViewModel;
 
 class OrderController extends AbstractActionController
 {
+    /**
+     * @var OrderService
+     */
+    protected $orderService;
+
+    /**
+     * @param OrderService $orderService
+     */
+    function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
 
     public function indexAction()
     {
@@ -24,7 +37,7 @@ class OrderController extends AbstractActionController
 
     public function orderAction()
     {
-        $catalogService = $this->getServiceLocator()->get('CatalogService');
+        //$catalogService = $this->getServiceLocator()->get('CatalogService');
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
@@ -34,43 +47,18 @@ class OrderController extends AbstractActionController
             ));
         }
 
-        $totalprice = 0;
+        $order = $this->orderService->createOrder($cart);
 
-        foreach ($cart as $product) {
-            $totalprice = $totalprice + ($product['quantity']*$product['product']->getPrice());
-        }
-
-        $date = new \DateTime("now");
-
-        $order = new Order();
-        $order->setPrice($totalprice);
-        $order->setDate($date);
-
-        $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-
-        $objectManager->persist($order);
-        $objectManager->flush();
-
-        foreach ($cart as $product) {
-            $orderHistory = new OrderHistory();
-
-            $orderHistory->setOrder($order);
-            $setProduct = $catalogService->getProduct($product['product']->getId());
-            $orderHistory->setProduct($setProduct);
-            $orderHistory->setProductPrice($setProduct->getPrice());
-            $orderHistory->setQuantity($product['quantity']);
-
-            $objectManager->persist($orderHistory);
-            $objectManager->flush();
-        }
-
-        $shoppingCartService->clearSession();
+        $shoppingCartService->emptyCart();
 
         return new ViewModel([
             'order' => $order
         ]);
+    }
+
+    public function viewAction()
+    {
+
     }
 
 }

@@ -2,6 +2,7 @@
 namespace Order;
 
 use Order\Controller\OrderController;
+use Order\Service\OrderService;
 
 return array(
     'doctrine' => array(
@@ -22,10 +23,22 @@ return array(
     ),
 
     'controllers' => array(
-        'invokables' => array(
-            'Order\Controller\Order' => 'Order\Controller\OrderController',
-        ),
+        'factories' => [
+            'Order\Controller\Order' => 'Order\Controller\OrderControllerFactory'
+        ]
     ),
+
+    'service_manager' => [
+        'factories' => [
+            'OrderService' => function ($sm) {
+                $objectManager = $sm->get('Doctrine\ORM\EntityManager');
+
+                $service = new OrderService($objectManager);
+
+                return $service;
+            }
+        ]
+    ],
 
     'router' => array(
         'routes' => array(

@@ -1,5 +1,4 @@
 <?php
-
 namespace Category;
 
 use Category\Controller\CategoryController;

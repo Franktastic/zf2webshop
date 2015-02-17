@@ -1,5 +1,4 @@
 <?php
-
 namespace Category\Controller;
 
 use Zend\ServiceManager\FactoryInterface;

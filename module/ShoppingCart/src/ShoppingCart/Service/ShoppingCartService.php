@@ -28,11 +28,18 @@ class ShoppingCartService
     }
 
     /**
-     * @return Cart[]
+     * @return array
      */
     public function getCart()
     {
-        return $this->sessionContainer->cart;
+        $result = [];
+        foreach ($this->sessionContainer->cart as $line) {
+            $result[] = [
+                'quantity' => $line['quantity'],
+                'product' => $this->catalogService->getProduct($line['product'])
+            ];
+        }
+        return $result;
     }
 
     /**
@@ -40,21 +47,17 @@ class ShoppingCartService
      */
     public function addToCart($productId)
     {
-        $product = $this->catalogService->getProduct($productId);
-
         $productExist = false;
 
         foreach ($this->sessionContainer->cart as $key => $value) {
-            $productvalue = $value['product'];
-
-            if ($productvalue->getId() === $productId) {
+            if ($value['product'] === $productId) {
                 $this->sessionContainer->cart[$key]['quantity']++;
                 $productExist = true;
             }
         }
 
         if ($productExist == false) {
-            $insertInSession = array('quantity' => 1, 'product' => $product);
+            $insertInSession = array('quantity' => 1, 'product' => $productId);
             $this->sessionContainer->cart[] = $insertInSession;
         }
 
@@ -62,9 +65,9 @@ class ShoppingCartService
     }
 
     /**
-     * @return Cart[]
+     * @return void
      */
-    public function clearSession()
+    public function emptyCart()
     {
         unset($this->sessionContainer->cart);
     }
