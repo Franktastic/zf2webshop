@@ -12,6 +12,13 @@ $this->headTitle($title);
             Prijs: &euro;<?=$order->getPrice();?> <br>
             Datum: <?=date_format($order->getDate(),"d-m-Y H:i:s");?>
         </p>
+        <p>
+            Uw gegevens:<br>
+            <?=$customer->getFirstname();?> <?=$customer->getSurname();?><br>
+            <?=$customer->getEmail();?> <br>
+            <?=$customer->getAddress();?> <br>
+            <?=$customer->getZipcode();?> <?=$customer->getCity();?><br>
+        </p>
     </div>
 
 </div>

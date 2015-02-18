@@ -11,7 +11,11 @@ $this->headTitle($title);
                 <dt>
                     Ordernummer: <?=$order->getId();?> <br>
                     <?=date_format($order->getDate(),"d-m-Y H:i");?> <br>
-                    Prijs: &euro;<?=$order->getPrice();?>
+                    Prijs: &euro;<?=$order->getPrice();?> <br></br>
+                    <?=$order->getCustomer()->getFirstname();?> <?=$order->getCustomer()->getSurname();?> <br>
+                    <?=$order->getCustomer()->getEmail();?> <br>
+                    <?=$order->getCustomer()->getAddress();?> <br>
+                    <?=$order->getCustomer()->getZipcode();?> <?=$order->getCustomer()->getCity();?><br>
                 </dt>
                 <dd>
                     <?php foreach($order->getHistory() as $orderhistory) {
@@ -22,6 +26,7 @@ $this->headTitle($title);
                     } ?>
                 </dd>
             </dl>
+            <hr>
         <?php endforeach; ?>
     <?php } else { ?>
         <p>Er zijn geen orders bekend</p>

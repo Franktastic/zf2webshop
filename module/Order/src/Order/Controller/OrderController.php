@@ -1,10 +1,13 @@
 <?php
 namespace Order\Controller;
 
+use Order\Model\Customer;
+use Order\Form\CustomerForm;
 use Order\Service\OrderService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+
 
 class OrderController extends AbstractActionController
 {
@@ -26,7 +29,10 @@ class OrderController extends AbstractActionController
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
+        $form = $this->orderService->createForm();
+
         return new ViewModel([
+            'form' => $form,
             'cart'  =>  $cart
         ]);
     }
@@ -42,13 +48,29 @@ class OrderController extends AbstractActionController
             ));
         }
 
-        $order = $this->orderService->createOrder($cart);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $customer = new Customer();
+            $form = new CustomerForm();
+            $form->setInputFilter($customer->getInputFilter());
+            $form->setData($request->getPost());
 
-        $shoppingCartService->emptyCart();
+            if ($form->isValid()) {
+                $customer->setData($form->getData());
 
-        return new ViewModel([
-            'order' => $order
-        ]);
+                //Save customer and data
+                $orderData = $this->orderService->createOrder($cart, $customer);
+                $shoppingCartService->emptyCart();
+
+                return new ViewModel($orderData);
+            } else {
+                //Should add flashmessage or something like that for feedback
+                return $this->redirect()->toRoute('order', array(
+                    'action' => 'index',
+                    'form' => $form
+                ));
+            }
+        }
     }
 
     public function viewAction()

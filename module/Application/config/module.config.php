@@ -104,6 +104,12 @@ return array(
             array(
                 'label' => 'Categorieën',
                 'route' => 'category',
+                'pages' => array(
+                    array(
+                        'label' => 'Product',
+                        'route' => 'product',
+                    ),
+                )
             ),
             array(
                 'label' => 'Bestellingen',

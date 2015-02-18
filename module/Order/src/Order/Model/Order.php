@@ -1,6 +1,8 @@
 <?php
 namespace Order\Model;
 
+use Order\Model\Customer;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,6 +17,12 @@ class Order
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="orders")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     */
+    protected $customer;
 
     /**
      * @ORM\OneToMany(targetEntity="OrderHistory", mappedBy="order")
@@ -77,6 +85,24 @@ class Order
     public function getHistory()
     {
         return $this->orderhistory;
+    }
+
+    /**
+     * @return $customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return $this
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        return $this;
     }
 
 }

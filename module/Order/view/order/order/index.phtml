@@ -33,8 +33,35 @@ $totalprice = 0;
     <?php } else { ?>
         <p>Er zitten geen producten in uw winkelwagen</p>
     <?php } ?>
-    <a class="btn btn-success btn-sm" href="<?php echo $this->url('order',
-        array('action'=>'order'));?>">
-        Bestellen
-    </a>
+</div>
+<div class="col-md-12">
+    <h2>Uw gegevens</h2>
+    <?php
+        $form->setAttribute('action', $this->url('order', array('action' => 'order', 'class' => 'form-horizontal')));
+        $form->prepare();
+
+        echo $this->form()->openTag($form);
+        //echo $this->formCollection($form);
+        echo $this->formHidden($form->get('id'));
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('firstname'));
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('surname'));
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('address'));
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('zipcode'));
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('city'));
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo $this->formRow($form->get('email'));
+        echo '</div>';
+        echo $this->formSubmit($form->get('submit'));
+        echo $this->form()->closeTag();
+    ?>
 </div>
