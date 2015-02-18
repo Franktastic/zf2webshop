@@ -71,4 +71,21 @@ class OrderHistory
         $this->quantity = $quantity;
         return $this;
     }
+
+    /**
+     * @return $product
+     */
+    public function getHistoryProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @return $quantity
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
 }

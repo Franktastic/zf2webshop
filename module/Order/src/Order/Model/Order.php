@@ -71,5 +71,12 @@ class Order
         return $this;
     }
 
+    /**
+     * @return $orderhistory
+     */
+    public function getHistory()
+    {
+        return $this->orderhistory;
+    }
 
 }

@@ -1,13 +1,9 @@
 <?php
 namespace Order\Controller;
 
-use Order\Model\Order;
-use Order\Model\OrderHistory;
-use Category\Model\Product;
 use Order\Service\OrderService;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\ViewModel;
 
 class OrderController extends AbstractActionController
@@ -37,7 +33,6 @@ class OrderController extends AbstractActionController
 
     public function orderAction()
     {
-        //$catalogService = $this->getServiceLocator()->get('CatalogService');
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
@@ -58,7 +53,11 @@ class OrderController extends AbstractActionController
 
     public function viewAction()
     {
+        $orders = $this->orderService->getOrders();
 
+        return new ViewModel([
+            'orders' => $orders
+        ]);
     }
 
 }

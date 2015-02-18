@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Category\Controller\Category',
+                        'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -57,6 +57,9 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
@@ -90,6 +93,28 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+            array(
+                'label' => 'Categorieën',
+                'route' => 'category',
+            ),
+            array(
+                'label' => 'Bestellingen',
+                'route' => 'order',
+                'action' => 'view'
+            ),
+            array(
+                'label' => 'Winkelwagen',
+                'route' => 'order',
+                'action' => 'index'
+            ),
         ),
     ),
     // Placeholder for console routes

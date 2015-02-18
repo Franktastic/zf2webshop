@@ -29,8 +29,6 @@ class CategoryController extends AbstractActionController
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
         $cart = $shoppingCartService->getCart();
 
-        //\Doctrine\Common\Util\Debug::dump($cart);
-
         return new ViewModel([
             'categories' => $categories,
             'cart'  =>  $cart
@@ -48,7 +46,6 @@ class CategoryController extends AbstractActionController
 
         $products = $this->catalogService->getProducts($categoryId);
 
-        //\Doctrine\Common\Util\Debug::dump($products);
         return new ViewModel([
             'products' => $products
         ]);
@@ -56,7 +53,7 @@ class CategoryController extends AbstractActionController
 
     public function clearSessionAction() {
         $shoppingCartService = $this->getServiceLocator()->get('ShoppingCartService');
-        $shoppingCartService->clearSession();
+        $shoppingCartService->emptyCart();
 
         return $this->redirect()->toRoute('category', array(
             'action' => 'index'

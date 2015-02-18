@@ -5,5 +5,25 @@ $this->headTitle($title);
 
 <div class="col-md-12">
     <h1><?php echo $this->escapeHtml($title); ?></h1>
-    Bestellingsoverzicht
+    <?php if (!empty($orders)) { ?>
+        <?php foreach ($orders as $order) : ?>
+            <dl class="dl-horizontal">
+                <dt>
+                    Ordernummer: <?=$order->getId();?> <br>
+                    <?=date_format($order->getDate(),"d-m-Y H:i");?> <br>
+                    Prijs: &euro;<?=$order->getPrice();?>
+                </dt>
+                <dd>
+                    <?php foreach($order->getHistory() as $orderhistory) {
+                        echo '<strong>'.$orderhistory->getHistoryProduct()->getTitle().'</strong><br>';
+                        echo $orderhistory->getHistoryProduct()->getDescription().'<br>';
+                        echo 'Stukprijs: &euro;'.$orderhistory->getHistoryProduct()->getPrice().'<br>';
+                        echo 'Aantal: '.$orderhistory->getQuantity().'<br></br>';
+                    } ?>
+                </dd>
+            </dl>
+        <?php endforeach; ?>
+    <?php } else { ?>
+        <p>Er zijn geen orders bekend</p>
+    <?php } ?>
 </div>
